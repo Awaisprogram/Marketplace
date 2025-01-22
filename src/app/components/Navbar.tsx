@@ -89,6 +89,7 @@ const Navbar = () => {
         <div className="lg:hidden flex items-center space-x-4">
           {!isSignedIn && <SignInButton />}
           {isSignedIn && <UserButton />}
+          <SearchBar />
           <button className="relative transition ease-in hover:text-color">
             <Link href="/cartpage">
               <FaShoppingCart className="text-xl cursor-pointer hover:text-Color" />

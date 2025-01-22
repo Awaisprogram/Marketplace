@@ -1,0 +1,18 @@
+# Node modules
+node_modules/
+
+# Next.js build output
+.next/
+
+# Environment variables
+.env.local
+
+# Log files
+*.log
+
+# Dependency directories
+package-lock.json
+yarn.lock
+
+# VSCode settings
+.vscode/

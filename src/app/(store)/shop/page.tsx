@@ -1,19 +1,13 @@
-import React from 'react'
+import React from "react";
 
-
-import ShopTop from '@/app/components/ShopTop'
-
+import ShopTop from "@/app/components/ShopTop";
 
 function Shop() {
   return (
     <>
-    
-      
-     
-      <ShopTop/>
-     
+      <ShopTop />
     </>
-  )
+  );
 }
 
-export default Shop
+export default Shop;

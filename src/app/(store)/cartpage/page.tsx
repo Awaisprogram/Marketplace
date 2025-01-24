@@ -14,12 +14,14 @@ const Cart = () => {
   const router = useRouter();
 
   useEffect(() => {
-    // Load cart items from localStorage on component mount
-    const storedCart = localStorage.getItem("cartItems");
-    if (storedCart) {
-      setCartItems(JSON.parse(storedCart));
+    if (typeof window !== "undefined") {
+      const storedCart = localStorage.getItem("cartItems");
+      if (storedCart) {
+        setCartItems(JSON.parse(storedCart));
+      }
     }
   }, [setCartItems]);
+  
 
   useEffect(() => {
     // Update localStorage whenever cartItems change
@@ -126,9 +128,9 @@ const Cart = () => {
                     <div className="flex text-sm divide-x">
                       <button
                         onClick={() => handleDelete(item.id)}
-                        className="flex items-center px-2 py-1 pl-0 space-x-1"
+                        className="flex items-center px-2 py-1 pl-0 space-x-1 cursor-pointer"
                       >
-                        <AiOutlineDelete size={20} />
+                        <AiOutlineDelete size={20} className="bg-gray-900 text-white"/>
                       </button>
                       <button
                         onClick={() => handleDecrement(item.id)}

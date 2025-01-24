@@ -13,14 +13,15 @@ const Cart = () => {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
-  useEffect(() => {
-    // Load cart items from localStorage on component mount
-    const storedCart = localStorage.getItem("cartItems");
-    if (storedCart) {
-      setCartItems(JSON.parse(storedCart));
+ useEffect(() => {
+    if (typeof window !== "undefined") {
+      const storedCart = localStorage.getItem("cartItems");
+      if (storedCart) {
+        setCartItems(JSON.parse(storedCart));
+      }
     }
   }, [setCartItems]);
-
+  
   useEffect(() => {
     // Update localStorage whenever cartItems change
     localStorage.setItem("cartItems", JSON.stringify(cartItems));

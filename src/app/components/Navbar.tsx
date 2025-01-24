@@ -9,7 +9,6 @@ import { useState } from "react";
 import { IoIosArrowDown } from "react-icons/io";
 import { useCart } from "../cartContext";
 import { SignInButton, UserButton, useUser } from "@clerk/nextjs";
-import { ComboboxDemo } from "./search";
 import SearchBar from "./searchbar";
 
 const Navbar = () => {
@@ -17,8 +16,8 @@ const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   // Get user state
-  const { isSignedIn, user } = useUser(); // Assuming `user` contains role information
-  const isAdmin = user?.publicMetadata?.role === "admin"; // Replace with your role-check logic
+  const { isSignedIn, user } = useUser();
+  const isAdmin = user?.publicMetadata?.role === "admin";
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
@@ -123,36 +122,41 @@ const Navbar = () => {
 
       {/* Mobile Dropdown Menu */}
       <div
-        className={`lg:hidden absolute top-[60px] left-0 bg-Background text-light text-center w-full p-10 transition-all duration-300 ease-in-out z-30 ${
-          mobileMenuOpen
-            ? "opacity-100 translate-y-0"
-            : "opacity-0 translate-y-10"
-        }`}
-      >
-        <Link href="/" className="block py-2 font-semibold hover:text-Color">
-          Home
-        </Link>
-        <Link href="/shop" className="block py-2 font-semibold hover:text-Color">
-          Shop
-        </Link>
-        <Link href="/about" className="block py-2 font-semibold hover:text-Color">
-          About
-        </Link>
-        <Link href="/contact" className="block py-2 font-semibold hover:text-Color">
-          Contact
-        </Link>
-        <Link href="/support" className="block py-2 font-semibold hover:text-Color">
-          Pages
-        </Link>
-        <Link href="/pricing" className="block py-2 font-semibold hover:text-Color">
-          Pricings
-        </Link>
-        {isAdmin && (
-          <Link href="/admin" className="block py-2 font-semibold hover:text-red-500">
-            Admin
-          </Link>
-        )}
-      </div>
+  className={`lg:hidden fixed top-0 left-0 h-full bg-Background text-light w-3/4 max-w-sm p-6 flex flex-col justify-center items-center transition-transform duration-300 ease-in-out z-30 ${
+    mobileMenuOpen ? "translate-x-0" : "-translate-x-full"
+  }`}
+>
+  <button
+    className="absolute top-4 right-4 text-black text-2xl"
+    onClick={toggleMobileMenu}
+  >
+    &times;
+  </button>
+  <Link href="/" className="block py-2 font-semibold hover:text-Color">
+    Home
+  </Link>
+  <Link href="/shop" className="block py-2 font-semibold hover:text-Color">
+    Shop
+  </Link>
+  <Link href="/about" className="block py-2 font-semibold hover:text-Color">
+    About
+  </Link>
+  <Link href="/contact" className="block py-2 font-semibold hover:text-Color">
+    Contact
+  </Link>
+  <Link href="/support" className="block py-2 font-semibold hover:text-Color">
+    Pages
+  </Link>
+  <Link href="/pricing" className="block py-2 font-semibold hover:text-Color">
+    Pricings
+  </Link>
+  {isAdmin && (
+    <Link href="/admin" className="block py-2 font-semibold hover:text-red-500">
+      Admin
+    </Link>
+  )}
+</div>
+
     </nav>
   );
 };

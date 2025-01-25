@@ -14,13 +14,16 @@ const Cart = () => {
   const router = useRouter();
 
  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const storedCart = localStorage.getItem("cartItems");
-      if (storedCart) {
-        setCartItems(JSON.parse(storedCart));
-      }
+  try {
+    const storedCart = localStorage.getItem("cartItems");
+    if (storedCart) {
+      setCartItems(JSON.parse(storedCart));
     }
-  }, [setCartItems]);
+  } catch (error) {
+    console.error("Error loading cart items from localStorage:", error);
+  }
+}, [setCartItems]);
+
   
   useEffect(() => {
     // Update localStorage whenever cartItems change

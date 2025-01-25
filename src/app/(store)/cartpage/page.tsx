@@ -13,16 +13,26 @@ const Cart = () => {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
- useEffect(() => {
+ if (typeof window !== "undefined") {
+  useEffect(() => {
   try {
     const storedCart = localStorage.getItem("cartItems");
     if (storedCart) {
-      setCartItems(JSON.parse(storedCart));
+      const parsedCart = JSON.parse(storedCart);
+      if (Array.isArray(parsedCart)) {
+        setCartItems(parsedCart); // Only set if valid array
+      } else {
+        console.warn("Cart items are not in the correct format.");
+        localStorage.removeItem("cartItems");
+      }
     }
   } catch (error) {
     console.error("Error loading cart items from localStorage:", error);
   }
 }, [setCartItems]);
+
+  
+}
 
   
   useEffect(() => {

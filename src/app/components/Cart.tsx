@@ -4,7 +4,7 @@ import { useCart } from "@/app/cartContext";
 import Image from "next/image";
 import { FaPlus, FaMinus } from "react-icons/fa";
 import { AiOutlineDelete } from "react-icons/ai";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { getProductById } from "@/app/utils/api";
 import { useRouter } from "next/navigation";
 
@@ -13,32 +13,8 @@ const Cart = () => {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
-  if (typeof window !== "undefined") {
-  useEffect(() => {
-  try {
-    const storedCart = localStorage.getItem("cartItems");
-    if (storedCart) {
-      const parsedCart = JSON.parse(storedCart);
-      if (Array.isArray(parsedCart)) {
-        setCartItems(parsedCart); // Only set if valid array
-      } else {
-        console.warn("Cart items are not in the correct format.");
-        localStorage.removeItem("cartItems");
-      }
-    }
-  } catch (error) {
-    console.error("Error loading cart items from localStorage:", error);
-  }
-}, [setCartItems]);
-
   
-}
-
-  useEffect(() => {
-    // Update localStorage whenever cartItems change
-    localStorage.setItem("cartItems", JSON.stringify(cartItems));
-  }, [cartItems]);
-
+  
   const getTotal = () =>
     cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
 

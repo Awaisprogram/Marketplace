@@ -4,17 +4,16 @@ import { useCart } from "@/app/cartContext";
 import Image from "next/image";
 import { FaPlus, FaMinus } from "react-icons/fa";
 import { AiOutlineDelete } from "react-icons/ai";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { getProductById } from "@/app/utils/api";
 import { useRouter } from "next/navigation";
 
 const Cart = () => {
-  const { cartItems, removeFromCart, updateQuantity, setCartItems } = useCart();
+  const { cartItems, removeFromCart, updateQuantity,  } = useCart();
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
-  
-  
+
   const getTotal = () =>
     cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
 

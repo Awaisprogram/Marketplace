@@ -13,7 +13,6 @@ type CartItem = {
 type CartContextType = {
   cartItems: CartItem[];
   cartItemCount: number; 
-  setCartItems: (items: CartItem[]) => void; 
   addToCart: (item: CartItem) => void;
   updateQuantity: (id: number, newQuantity: number) => void;
   removeFromCart: (id: number) => void;
@@ -70,7 +69,6 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
         addToCart,
         updateQuantity,
         removeFromCart,
-        setCartItems,
       }}
     >
       {children}

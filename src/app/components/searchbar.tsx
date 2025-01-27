@@ -144,7 +144,7 @@ const SearchBar = () => {
                   Try another search term.
                 </p>
               ) : (
-                <p>
+                <p className="flex items-center gap-2">
                   <Search className="w-5 h-5 text-gray-500" />
                   Start searching to see products.
                 </p>

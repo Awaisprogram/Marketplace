@@ -55,7 +55,7 @@ async function All() {
             {/* "View Details" Button */}
             <div className="flex justify-center mt-4">
               <Link href={`/add/${product._id}`}>
-                <button className="bg-Color text-white py-2 px-6 rounded-full hover:opacity:90  transition duration-200 ease-in">
+                <button className="bg-Color text-white py-2 px-6 rounded-full hover:bg-blue-500  transition duration-200 ease-in">
                   View Details
                 </button>
               </Link>

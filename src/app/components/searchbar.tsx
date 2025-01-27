@@ -29,9 +29,8 @@ const SearchBar = () => {
     }
     setLoading(true);
     try {
-      // Query to match slug.current
       const query = `*[_type == "product" && slug.current match $search] | order(name asc)`;
-      const params = { search: `${search}*` }; // Searching by slug prefix
+      const params = { search: `${search}*` };
       const response = await client.fetch(query, params);
       setProducts(response);
     } catch (error) {
@@ -40,112 +39,118 @@ const SearchBar = () => {
       setLoading(false);
     }
   }, [search]);
-  
 
   useEffect(() => {
     const debounceTimer = setTimeout(() => {
       fetchProducts();
-    }, 300); // Debounce user input
+    }, 300);
     return () => clearTimeout(debounceTimer);
   }, [search, fetchProducts]);
 
   return (
     <Dialog open={showSearch} onOpenChange={() => setShowSearch(!showSearch)}>
       <DialogTrigger onClick={() => setShowSearch(!showSearch)}>
-        <Search className="w-5 h-5 hover:text-darkColor hoverEffect" />
+        <Search className="w-5 h-5 hover:text-blue-600 hover:scale-110 transition-transform cursor-pointer" />
       </DialogTrigger>
-      <DialogContent className="max-w-5xl min-h-[90vh] max-h-[90vh] flex flex-col overflow-hidden">
+      <DialogContent className="max-w-5xl min-h-[90vh] max-h-[90vh] flex flex-col overflow-hidden bg-gray-50 rounded-lg shadow-lg">
         <DialogHeader>
-          <DialogTitle className="mb-1">Product Searchbar</DialogTitle>
-          <form className="relative" onSubmit={(e) => e.preventDefault()}>
+          <DialogTitle className="text-lg font-semibold text-gray-800">
+            Search Products
+          </DialogTitle>
+          <form
+            className="relative mt-4"
+            onSubmit={(e) => e.preventDefault()}
+          >
             <Input
-              placeholder="Search your product by name..."
-              className="flex-1 rounded-md py-5"
+              placeholder="Search products by name..."
+              className="flex-1 py-3 px-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
             />
             {search && (
               <X
                 onClick={() => setSearch("")}
-                className="w-4 h-4 absolute top-3 right-11 hover:text-red-600 hoverEffect"
+                className="absolute top-3 right-16 w-4 h-4 text-gray-400 cursor-pointer hover:text-red-600 transition-colors"
               />
             )}
             <button
               type="submit"
-              className={`absolute right-0 top-0 w-10 h-full flex items-center justify-center rounded-tr-md rounded-br-md hover:bg-darkColor hover:text-white hoverEffect ${search ? "bg-darkColor text-white" : "bg-darkColor/10"}`}
+              className={`absolute right-0 top-0 w-12 h-full flex items-center justify-center rounded-tr-md rounded-br-md ${
+                search
+                  ? "bg-Color text-white hover:bg-blue-700"
+                  : "bg-gray-300 text-gray-600"
+              } transition`}
             >
               <Search className="w-5 h-5" />
             </button>
           </form>
         </DialogHeader>
-        <div className="w-full h-full overflow-y-scroll border border-darkColor/20 rounded-md">
-          <div>
-            {loading ? (
-              <p className="flex items-center px-6 py-10 gap-1 text-center text-yellow-600 font-semibold">
-                <Loader2 className="w-5 h-5 animate-spin" />
-                Searching in progress...
-              </p>
-            ) : products.length ? (
-              products?.map((product: Product) => (
-                <div
-                  key={product?._id}
-                  className="bg-white overflow-hidden border-b last:border-b-0"
-                >
-                  <div className="flex items-center p-1">
+        <div className="w-full h-full overflow-y-auto border border-gray-200 rounded-md mt-4 bg-white">
+          {loading ? (
+            <p className="flex items-center justify-center py-10 gap-2 text-Color font-semibold">
+              <Loader2 className="w-5 h-5 animate-spin" />
+              Searching products...
+            </p>
+          ) : products.length ? (
+            products.map((product: Product) => (
+              <div
+                key={product?._id}
+                className="p-4 border-b border-gray-200 last:border-b-0 hover:bg-gray-50 transition"
+              >
+                <div className="flex items-center gap-4">
+                  <Link
+                    href={`/add/${product?._id}`}
+                    onClick={() => setShowSearch(false)}
+                    className="h-20 w-20 md:h-24 md:w-24 flex-shrink-0 border border-gray-300 rounded-md overflow-hidden shadow-sm"
+                  >
+                    {product?.image && (
+                      <Image
+                        width={200}
+                        height={200}
+                        src={urlFor(product?.image).url()}
+                        alt={product?.name || "Product"}
+                        className="object-cover w-full h-full hover:scale-105 transition-transform"
+                      />
+                    )}
+                  </Link>
+                  <div className="flex-grow">
                     <Link
                       href={`/add/${product?._id}`}
-                      className="h-20 w-20 md:h-24 md:w-24 flex-shrink-0 border border-darkColor/20 rounded-md overflow-hidden group"
                       onClick={() => setShowSearch(false)}
                     >
-                      {product?.image && (
-                        <Image
-                          width={200}
-                          height={200}
-                          src={urlFor(product?.image).url()}
-                          alt="productImage"
-                          className="object-cover w-full h-full group-hover:scale-110 hoverEffect"
-                        />
-                      )}
+                      <h3 className="text-md font-medium text-gray-800 hover:text-blue-600 transition-colors">
+                        {product?.name}
+                      </h3>
+                      <p className="text-sm text-gray-600 mt-1 line-clamp-2 w-72">
+                        {product?.description}
+                      </p>
                     </Link>
-                    <div className="px-4 py-2 flex-grow">
-                      <Link
-                        href={`/product/${product?._id}`}
-                        onClick={() => setShowSearch(false)}
-                      >
-                        <h3 className="text-sm md:text-lg font-semibold text-gray-800 line-clamp-1">
-                          {product?.name}
-                        </h3>
-                        <p className="text-sm text-gray-600 line-clamp-1">
-                          {product?.description}
-                        </p>
-                      </Link>
-                      <div className="text-sm md:text-lg text-gray-800">
-                        <span>Price: ${product.price}</span>
-                      </div>
-                    </div>
-                    <div className="w-60 mt-1">
-                      <AddToCartButton product={product} />
-                    </div>
+                    <p className="text-sm font-semibold text-gray-800 mt-2">
+                      Price: ${product?.price}
+                    </p>
+                  </div>
+                  <div>
+                    <AddToCartButton product={product}  className="lg-block hidden"/>
                   </div>
                 </div>
-              ))
-            ) : (
-              <div className="text-center py-10 font-semibold tracking-wide">
-                {search && !loading ? (
-                  <p>
-                    No products found for the name{" "}
-                    <span className="underline text-red-600">{search}</span>.
-                    Please try another name.
-                  </p>
-                ) : (
-                  <p className="text-green-600 flex items-center justify-center gap-1">
-                    <Search className="w-5 h-5" />
-                    Search and explore your products by name.
-                  </p>
-                )}
               </div>
-            )}
-          </div>
+            ))
+          ) : (
+            <div className="flex flex-col items-center justify-center py-10 text-gray-600">
+              {search ? (
+                <p>
+                  No results for{" "}
+                  <span className="text-red-600 underline">{search}</span>.
+                  Try another search term.
+                </p>
+              ) : (
+                <p>
+                  <Search className="w-5 h-5 text-gray-500" />
+                  Start searching to see products.
+                </p>
+              )}
+            </div>
+          )}
         </div>
       </DialogContent>
     </Dialog>

@@ -144,7 +144,9 @@ const ProductDetails = () => {
                  <button className="rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500">
                    <FaHeart className="w-5 h-5" />
                  </button>
-                 <button className="rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500">
+                 <button
+                   onClick={handleAddToCart}
+                   className="rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500">
                    <FaShoppingCart className="w-5 h-5" />
                  </button>
                  <button className="rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500">

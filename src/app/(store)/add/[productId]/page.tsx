@@ -12,6 +12,7 @@ import Quick from '@/app/components/Quick';
 import Best from '@/app/components/BestSeller';
 import Sponser from '@/app//components/Sponser';
 import LoadingSkeleton from "@/app/components/Loading";
+import { useToastContext } from "@/app/toastContext";
 
 interface Product {
   _id: number;
@@ -41,6 +42,7 @@ const ProductDetails = () => {
   const [product, setProduct] = useState<Product | null>(null);
   const [error, setError] = useState(false); 
   const { addToCart } = useCart(); 
+  const { addToast } = useToastContext();
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -80,7 +82,10 @@ const ProductDetails = () => {
       quantity: 1,
       image: product.image,
     });
-    alert(`${product.name} added to cart`);
+     addToast({
+      title: "Confirmation",
+      description: `${product.name} added to cart`
+    });
   };
 
   return (

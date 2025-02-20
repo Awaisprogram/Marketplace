@@ -107,7 +107,7 @@ function Features() {
             className="rounded-lg p-4  flex flex-col items-center justify-center"
           >
             {/* Product Image */}
-            <div className="relative w-[200px] h-96 mb-4">
+            <div className="relative lg:w-[200px] w-[260px] h-96 mb-4">
               <Image
                 src={product.image}
                 alt={product.name}

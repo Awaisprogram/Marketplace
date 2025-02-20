@@ -100,14 +100,14 @@ function Features() {
       </div>
 
       {/* Product Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 mt-6">
+      <div className="flex items-center  justify-center flex-wrap gap-2 mt-6">
         {products.map((product, index) => (
           <div
             key={index}
             className="rounded-lg p-4  flex flex-col items-center justify-center"
           >
             {/* Product Image */}
-            <div className="relative w-full h-96 mb-4">
+            <div className="relative w-[200px] h-96 mb-4">
               <Image
                 src={product.image}
                 alt={product.name}

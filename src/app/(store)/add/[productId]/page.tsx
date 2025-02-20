@@ -11,6 +11,7 @@ import CartTop from '@/app/components/CartTop';
 import Quick from '@/app/components/Quick';
 import Best from '@/app/components/BestSeller';
 import Sponser from '@/app//components/Sponser';
+import LoadingSkeleton from "@/app/components/Loading";
 
 interface Product {
   _id: number;
@@ -67,9 +68,7 @@ const ProductDetails = () => {
 
   if (!product) {
     return (
-      <div className="flex justify-center items-center min-h-[80vh] text-5xl font-bold">
-        Loading...
-      </div>
+      <LoadingSkeleton/>
     );
   }
 

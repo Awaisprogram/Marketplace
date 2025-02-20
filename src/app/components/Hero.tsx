@@ -1,6 +1,7 @@
 import React from "react";
 import Button from "./Button";
 import { client } from "../../sanity/lib/client";
+import Link from "next/link";
 
 
 interface type {
@@ -53,7 +54,9 @@ async function Hero() {
              </p>
    
              {/* Button */}
+             <Link href="./shop"> 
              <Button text="SHOP NOW"/>
+             </Link>
             
            </div>
            </div>

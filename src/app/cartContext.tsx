@@ -1,6 +1,5 @@
 "use client";
-
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useState, useEffect } from "react";
 
 type CartItem = {
   id: number;
@@ -12,7 +11,7 @@ type CartItem = {
 
 type CartContextType = {
   cartItems: CartItem[];
-  cartItemCount: number; 
+  cartItemCount: number;
   addToCart: (item: CartItem) => void;
   updateQuantity: (id: number, newQuantity: number) => void;
   removeFromCart: (id: number) => void;
@@ -23,13 +22,33 @@ const CartContext = createContext<CartContextType | undefined>(undefined);
 export const CartProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
+  // Initialize cart state from local storage or as an empty array
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
 
+  useEffect(() => {
+    // Ensure this runs only on the client side
+    if (typeof window !== "undefined") {
+      const storedCart = localStorage.getItem("cart");
+      if (storedCart) {
+        setCartItems(JSON.parse(storedCart));
+      }
+    }
+  }, []);
+
+  // Update local storage whenever the cart changes
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      localStorage.setItem("cart", JSON.stringify(cartItems));
+    }
+  }, [cartItems]);
+
+  // Calculate total cart item count
   const cartItemCount = cartItems.reduce(
     (total, item) => total + item.quantity,
     0
   );
 
+  // Add an item to the cart
   const addToCart = (item: CartItem) => {
     setCartItems((prevItems) => {
       const existingItem = prevItems.find((cartItem) => cartItem.id === item.id);
@@ -40,25 +59,35 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({
             : cartItem
         );
       }
-      return [...prevItems, item];
+      return [...prevItems, { ...item, quantity: 1 }];
     });
   };
 
+  // Update the quantity of an item in the cart
   const updateQuantity = (id: number, newQuantity: number) => {
     setCartItems((prevItems) =>
       prevItems.map((item) =>
-        item.id === id ? { ...item, quantity: newQuantity } : item
+        item.id === id
+          ? { ...item, quantity: newQuantity > 0 ? newQuantity : 1 } // Ensure quantity is at least 1
+          : item
       )
     );
   };
 
+  // Remove an item from the cart
   const removeFromCart = (id: number) => {
     setCartItems((prevItems) => prevItems.filter((item) => item.id !== id));
   };
 
   return (
     <CartContext.Provider
-      value={{ cartItems, cartItemCount, addToCart, updateQuantity, removeFromCart }}
+      value={{
+        cartItems,
+        cartItemCount,
+        addToCart,
+        updateQuantity,
+        removeFromCart,
+      }}
     >
       {children}
     </CartContext.Provider>

@@ -11,7 +11,7 @@ import img4 from "../images/filter (3).png";
 
  function Pick() {
   return (
-    <div className="bg-gray-100">
+    <div className="bg-gray-100 lg:block hidden">
       <div>
         <Heading
           title="EDITORS PICK"

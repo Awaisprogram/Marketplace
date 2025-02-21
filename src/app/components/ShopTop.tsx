@@ -13,7 +13,11 @@ import Navigation from "./Navigation";
 function ShopTop() {
   return (
     <>
-      
+      <div className="flex justify-between items-center px-5 py-10 max-w-[1050px] container mx-auto">
+        <h1 className="text-2xl font-black text-black">Shop</h1>
+         <Navigation current="Shop" previous="Home" href="/"/>
+      </div>
+
       <div className="text-center py-10 max-w-[1050px] container mx-auto">
         <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-5 gap-4 px-5">
           {/* Image 1 */}

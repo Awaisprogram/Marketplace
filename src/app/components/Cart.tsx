@@ -5,6 +5,7 @@ import Image from "next/image";
 import { FaPlus, FaMinus } from "react-icons/fa";
 import { AiOutlineDelete } from "react-icons/ai";
 import { useRouter } from "next/navigation";
+import Navigation from "./Navigation";
 
 
 const Cart = () => {
@@ -43,7 +44,10 @@ const Cart = () => {
 
   return (
     <div className="flex justify-center flex-col p-6 space-y-4 sm:p-10 dark:bg-gray-50 dark:text-gray-800">
-      <h2 className="text-4xl font-semibold">Your cart</h2>
+      <div className="flex justify-between items-center px-2 pb-8">
+        <h1 className="text-2xl font-black text-black">Your Cart</h1>
+        <Navigation current="Cart" previous="Shop" href="/shop"/>
+      </div>
       {cartItems.length === 0 ? (
         <p className="text-center text-gray-500 h-[60dvh] flex justify-center items-center text-3xl font-bold">
          Your cart is empty

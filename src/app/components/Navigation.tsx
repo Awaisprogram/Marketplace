@@ -10,7 +10,7 @@ interface type{
 function Navigation({current,previous,href}:type) {
   return (
     <div>
-      <div className="flex gap-2">
+      <div className="flex gap-3">
           <Link
             href={href}
             className="cursor-pointer hover:text-Color transtion ease duration-500"

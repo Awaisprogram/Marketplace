@@ -15,7 +15,7 @@ function ShopTop() {
     <>
       <div className="flex justify-between items-center px-5 py-10 max-w-[1050px] container mx-auto">
         <h1 className="text-xl font-black text-black">Shop</h1>
-        <Navigation current="Shop"/>
+         <Navigation current="Shop" previous="Home" href="/"/>
       </div>
 
       <div className="text-center py-10 max-w-[1050px] container mx-auto">

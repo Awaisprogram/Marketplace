@@ -3,19 +3,17 @@ import Link from 'next/link'
 
 interface type{
   current:string
-  previous:string
-  href:string
 }
 
-function Navigation({current,previous,href}:type) {
+function Navigation({current}:type) {
   return (
     <div>
-      <div className="flex gap-3">
+      <div className="flex gap-2">
           <Link
-            href={href}
+            href="/"
             className="cursor-pointer hover:text-Color transtion ease duration-500"
           >
-            {previous}/
+            Home /
           </Link>
           <span> {current} </span>
         </div>

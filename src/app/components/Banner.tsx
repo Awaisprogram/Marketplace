@@ -3,6 +3,7 @@ import Image from "next/image";
 import bannerImage from "../images/shop-hero-2-png-picture-1.png"; 
 import Button from "./Button";
 import Neutral from "./Neutral";
+import Link from 'next/link';
 import { client } from "../../sanity/lib/client";
 
 interface type {
@@ -48,7 +49,9 @@ const Banner = async() => {
 
             <div className="flex items-center gap-4">
               <span className="text-2xl font-semibold">{item.price}</span>
-              <Button text="ADD TO CART" />
+              <Link href="/shop">
+              <Button text="SHOP NOW" />
+                </Link>
             </div>
           </div>
 

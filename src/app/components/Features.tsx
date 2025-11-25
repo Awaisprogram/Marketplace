@@ -46,6 +46,7 @@ async function Features() {
       {/* Product Grid */}
       <div className="flex items-center  justify-center flex-wrap gap-2 mt-6">
         {data.map((product, index) => (
+
           <div
             key={index}
             className="rounded-lg p-4  flex flex-col items-center justify-center"
@@ -53,6 +54,7 @@ async function Features() {
             {/* Product Image */}
             <Link href={`/add/${product._id}`}>
             <div className="relative cursor-pointer lg:w-[200px] w-[260px] h-96 mb-4">
+
               <Image
                 src={product.image}
                 alt={product.name}

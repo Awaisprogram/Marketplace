@@ -47,7 +47,7 @@ function CheckoutPage() {
       return;
     }
   
-    setLoading(true); 
+    setLoading(true); // Set loading state
   
     const orderData = {
       _type: "order",

@@ -8,7 +8,7 @@ type Props = {
 
 const Topbar = ({className}:Props) => {
   return (
-    <div className={`bg-black1 text-white max-w-[1438px] h-[58px] text-[14px] flex justify-between hidden items-center lg:block bg-${className}`}>
+    <div className={`bg-black1 text-white  h-[58px] text-[14px] flex justify-between hidden items-center lg:block bg-${className}`}>
       <div className="flex justify-between items-center px-2 w-full h-full">
         {/* Left Section: Contact */}
         <div className="flex items-center space-x-4 w-[416px] h-full">

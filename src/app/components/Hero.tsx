@@ -30,7 +30,7 @@ async function Hero() {
  
   return (
     <>
-      <section className="relative bg-[#23A6F0] max-w-[1440px] h-[716px] py-20 flex items-center justify-between px-8 lg:px-24">
+      <section className="relative bg-[#23A6F0]  h-[716px] py-20 flex items-center justify-between px-8 lg:px-24">
         {/* Background Image */}
         {data.map((item, value)=>(
            <div key={value}>
@@ -57,6 +57,7 @@ async function Hero() {
              <Link href="./shop"> 
              <Button text="SHOP NOW"/>
              </Link>
+
            </div>
            </div>
         ))}

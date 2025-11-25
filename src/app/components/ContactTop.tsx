@@ -58,7 +58,8 @@ function ContactSection() {
           alt="Contact Image" 
           width={500} 
           height={500} 
-          className="w-full h-auto "
+    
+    className="w-full h-auto "
         />
       </div>
      

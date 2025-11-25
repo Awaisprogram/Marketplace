@@ -29,23 +29,21 @@ async function All() {
   return (
     <div className="max-w-screen-xl mx-auto p-4">
      
-      <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
+      <div className="flex flex-wrap justify-center items-center gap-4">
         {data.map((product) => (
           <div
             key={product._id}
             className="p-4 rounded-lg hover:text-color transition duration-300 ease-in"
           >
             <Link href={`/add/${product._id}`}>
-              <div className="flex justify-center mb-4 text-center group cursor-pointer">
-                <Image
-                  src={product.image}
-                  alt={product.name}
-                  width={200}
-                  height={200}
-                  unoptimized
-                  className="rounded-lg h-96 object-cover cursor-pointer"
-                />
-              </div>
+            <div className="relative lg:w-[200px] w-[260px] h-96 mb-4">
+              <Image
+                src={product.image}
+                alt={product.name}
+                layout="fill"
+                className="object-cover rounded-lg"
+              />
+            </div>
             </Link>
 
             <h3 className="text-xl font-semibold text-center">{product.name}</h3>

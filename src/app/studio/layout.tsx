@@ -1,4 +1,4 @@
-import { CartProvider } from "@/app/cartContext";
+
 
 export const metadata = {
   title: "Next.js",
@@ -12,9 +12,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-       <CartProvider>
+      
        <body>{children}</body>
-       </CartProvider>
+       
       
     </html>
   );

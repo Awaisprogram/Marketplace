@@ -15,19 +15,34 @@ export default {
       options: {
         source: "name",
         maxLength: 200,
-        slugify: (input:any) => input
+        slugify: (input: any) => input
           .toLowerCase()
           .replace(/\s+/g, "-") // Replace spaces with hyphens
           .replace(/[^a-z0-9-]/g, "") // Remove special characters
           .slice(0, 200),
       },
     },
-    
+    {
+      name: 'category',
+      title: 'Category',
+      type: 'string',
+      options: {
+        list: [
+          { title: 'Women', value: 'women' },
+          { title: 'Men', value: 'men' },
+          { title: 'Accessories', value: 'accessories' },
+          { title: 'Kids', value: 'kids' },
+          { title: 'Sale', value: 'sale' },
+        ],
+        layout: 'dropdown',
+      },
+      validation: (Rule: any) => Rule.required(),
+    },
     {
       name: 'image',
       type: 'image',
       options: {
-        hotspot: true, // Optional: This allows image cropping in the Sanity Studio
+        hotspot: true, 
       },
     },
   ],

@@ -32,7 +32,7 @@ async function Neutral() {
     <div>
       <section className="text-gray-600 body-font pt-0"> 
       {data.map((item, index) => (
-        <div key={index} className="container mx-auto flex px-5 md:py-24 lg:p-0 gap-10 md:flex-row flex-col-reverse items-center  max-w-[1050px]">
+        <div key={index} className="max-w-[1310px] mx-auto flex px-5 md:py-24 lg:p-0 gap-4 md:flex-row flex-col-reverse items-center  max-w-[1050px]">
           <div className="lg:max-w-lg lg:w-full md:w-1/2 w-5/6 mb-10 md:mb-0">
             <Image
               className="object-cover object-center rounded"

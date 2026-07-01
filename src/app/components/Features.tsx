@@ -4,7 +4,7 @@ import Image from "next/image";
 import { client } from "../../sanity/lib/client";
 import Link from "next/link";
 import Colors from "./color";
-
+import Button from "./Button";
 
 interface type {
   _id: number;
@@ -16,7 +16,7 @@ interface type {
 
 async function getData() {
   const res = client.fetch(
-    `*[_type == "product"][0...8]{
+    `*[_type == "product"][0...4]{
       _id,
       name,
       subtext,
@@ -29,10 +29,9 @@ async function getData() {
 
 async function Features() {
   const data: type[] = await getData();
-  const colors = ["blue", "green", "orange", "purple"];
 
   return (
-    <div className="container mx-auto p-4 max-w-[1050px]">
+    <div className="mx-auto p-4 max-w-[1310px] mb-20">
       {/* Heading */}
       <div>
         <Heading
@@ -44,28 +43,29 @@ async function Features() {
       </div>
 
       {/* Product Grid */}
-      <div className="flex items-center  justify-center flex-wrap gap-2 mt-6">
-        {data.map((product, index) => (
-
+      <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-6">
+        {data.map((product) => (
           <div
-            key={index}
-            className="rounded-lg p-4  flex flex-col items-center justify-center"
+            key={product._id}
+            className="rounded-lg p-2 sm:p-4 flex flex-col items-center justify-center w-full"
           >
             {/* Product Image */}
-            <Link href={`/add/${product._id}`}>
-            <div className="relative cursor-pointer lg:w-[200px] w-[260px] h-96 mb-4">
-
-              <Image
-                src={product.image}
-                alt={product.name}
-                layout="fill"
-                className="object-cover rounded"
+            <Link href={`/add/${product._id}`} className="w-full">
+              <div className="relative cursor-pointer w-full aspect-[3/4] mb-4">
+                <Image
+                  src={product.image}
+                  alt={product.name}
+                  fill
+                  sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, (max-width: 1024px) 33vw, 25vw"
+                  className="object-cover rounded"
                 />
-            </div>
-                </Link>
+              </div>
+            </Link>
 
             {/* Product Details */}
-            <h3 className="text-lg font-semibold">{product.name}</h3>
+            <h3 className="text-sm sm:text-base md:text-lg font-semibold text-center">
+              {product.name}
+            </h3>
 
             {/* Prices */}
             <div className="flex items-center gap-2 mt-2">
@@ -76,9 +76,15 @@ async function Features() {
 
             {/* Color Options */}
             <Colors />
-
           </div>
         ))}
+      </div>
+
+      {/* Shop More Button */}
+      <div className="flex justify-center mt-10">
+        <Link href="/shop">
+          <Button text="SHOP MORE" />
+        </Link>
       </div>
     </div>
   );

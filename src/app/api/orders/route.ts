@@ -2,7 +2,7 @@ import Stripe from "stripe";
 import { NextResponse } from "next/server";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || "", {
-  apiVersion: "2025-12-15.clover", // Update with the latest API version
+  apiVersion: "2026-02-25.clover",
 });
 
 type Data = {

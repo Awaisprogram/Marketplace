@@ -16,3 +16,6 @@ yarn.lock
 
 # VSCode settings
 .vscode/
+
+# clerk configuration (can include secrets)
+/.clerk/

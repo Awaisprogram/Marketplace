@@ -4,7 +4,7 @@ import All from "./All-products";
 
 async function Features() {
   return (
-    <div className="container mx-auto p-4 max-w-[1050px]">
+    <div className="container mx-auto max-w-[1310px]">
       {/* Heading Section */}
       <div>
         <Heading

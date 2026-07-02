@@ -230,15 +230,18 @@ function ShopTop({ products = [] }: ShopTopProps) {
                   </div>
                 </div>
                 <div className="p-4">
-                  <h3 className="font-semibold text-sm sm:text-base truncate">
+                  <h3 className="font-semibold text-center text-sm sm:text-base truncate">
                     {product.name}
                   </h3>
                   <p className="text-xs text-gray-400 truncate">
                     {product.subtext}
                   </p>
-                  <span className="font-bold text-sm sm:text-base">
-                    ${product.price}
-                  </span>
+                  <div className="flex flex-col items-center justify-center gap-2 mt-2">
+                    <span className="text-green-500 text-center font-semibold">
+                      ${product.price}
+                    </span>
+                    <Colors />
+                  </div>
                 </div>
               </Link>
             ) : (

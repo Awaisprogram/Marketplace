@@ -213,6 +213,7 @@ function ShopTop({ products = [] }: ShopTopProps) {
                     sizes="(max-width: 640px) 50vw, 25vw"
                     className="object-cover transition-transform duration-500 ease-out group-hover:scale-110"
                   />
+                  
 
                   {/* Gradient scrim */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -229,6 +230,7 @@ function ShopTop({ products = [] }: ShopTopProps) {
                     </button>
                   </div>
                 </div>
+                
                 <div className="p-4">
                   <h3 className="font-semibold text-center text-sm sm:text-base truncate">
                     {product.name}

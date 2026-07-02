@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import Navigation from "./Navigation";
 import Toggle from "./Toggle";
 import Pricings from "./Pricings";
@@ -7,9 +9,10 @@ import Faq from "./Faq";
 import Trial from "./Trial";
 
 function PriceTop() {
+  const [isYearly, setIsYearly] = useState(false);
   return (
     <>
-      <div className="container mx-auto p-24 max-w-[1050px] flex flex-col items-center justify-center leading-relaxed">
+      <div className="max-w-[1320px] mx-auto p-24  flex flex-col items-center justify-center leading-relaxed">
         <h3 className="text-black1 text-base mb-4 font-bold">PRICING</h3>
 
         {/* Big Heading */}
@@ -36,20 +39,20 @@ function PriceTop() {
           <div className="flex items-center justify-between gap-5 px-4 w-full">
             {/* Monthly and Toggle */}
             <div className="flex items-center gap-5">
-              <h1 className="font-bold text-lg">Monthly</h1>
-              <Toggle />
+              <h1 className={`font-bold text-lg transition-opacity ${isYearly ? 'opacity-40' : 'opacity-100'}`}>Monthly</h1>
+              <Toggle checked={isYearly} onChange={setIsYearly} />
             </div>
 
             {/* Yearly and Save 25% */}
             <div className="flex items-center gap-5">
-              <h1 className="font-bold">Yearly</h1>
+              <h1 className={`font-bold text-lg transition-opacity ${isYearly ? 'opacity-100' : 'opacity-40'}`}>Yearly</h1>
               <span className="bg-blue-300 text-black px-8 py-4 rounded-full">
                 Save 25%
               </span>
             </div>
           </div>
 
-          <Pricings />
+          <Pricings isYearly={isYearly} />
           <Sponser heading="Trusted By Over 4000 Big Companies" />
           <Faq />
         </div>

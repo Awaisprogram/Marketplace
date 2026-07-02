@@ -12,6 +12,8 @@ import { MdWindow } from "react-icons/md";
 import { TbListCheck } from "react-icons/tb";
 import { FiShoppingCart } from "react-icons/fi";
 import Navigation from "./Navigation";
+import Colors from "./color";
+import SortDropdown, { SortOption } from "./SortDropdown";
 
 interface Product {
   _id: number;
@@ -27,7 +29,6 @@ interface ShopTopProps {
 }
 
 type ViewMode = "grid" | "list";
-type SortOption = "popularity" | "featured" | "price-low" | "price-high" | "newest";
 
 const categories = [
   { key: "women", label: "Women", image: s1 },
@@ -174,17 +175,7 @@ function ShopTop({ products = [] }: ShopTopProps) {
         </div>
 
         <div className="flex items-center gap-2">
-          <select
-            value={sortBy}
-            onChange={(e) => setSortBy(e.target.value as SortOption)}
-            className="px-3 py-2 border rounded-md text-sm cursor-pointer focus:outline-none focus:ring-1 focus:ring-Color"
-          >
-            <option value="popularity">Popularity</option>
-            <option value="featured">Featured</option>
-            <option value="price-low">Price: Low to High</option>
-            <option value="price-high">Price: High to Low</option>
-            <option value="newest">Newest</option>
-          </select>
+          <SortDropdown value={sortBy} onChange={setSortBy} />
           <button
             type="button"
             className="px-4 py-2 bg-Color text-white text-sm rounded-md hover:opacity-90 transition-opacity duration-200"
@@ -212,9 +203,9 @@ function ShopTop({ products = [] }: ShopTopProps) {
               <Link
                 key={product._id}
                 href={`/add/${product._id}`}
-                className="group block rounded-2xl border border-gray-100 overflow-hidden bg-white transition-all duration-300"
+                className="group block rounded-2xl overflow-hidden transition-all duration-300"
               >
-                <div className="relative w-full aspect-[3/4] overflow-hidden bg-gray-50">
+                <div className="relative w-full aspect-[3/4] overflow-hidden">
                   <Image
                     src={product.image}
                     alt={product.name}

@@ -5,10 +5,11 @@ interface PricingCardProps {
   title: string;
   price: string;
   offers: string[];
-  isHighlighted?: boolean; 
+  isHighlighted?: boolean;
+  isYearly?: boolean;
 }
 
-const PricingCard: React.FC<PricingCardProps> = ({ title, price, offers, isHighlighted = false }) => {
+const PricingCard: React.FC<PricingCardProps> = ({ title, price, offers, isHighlighted = false, isYearly = false }) => {
   return (
     <div
       className={`p-6 mt-10 flex flex-col items-center text-center rounded lg:rounded-lg border-2 ${
@@ -26,7 +27,7 @@ const PricingCard: React.FC<PricingCardProps> = ({ title, price, offers, isHighl
           <p className="text-6xl font-bold text-Color">{price}</p>
           <div className="flex flex-col items-center">
             <p className="text-Color -translate-x-1/2">$</p>
-            <span className="text-Color text-sm">/month</span>
+            <span className="text-Color text-sm">{isYearly ? '/year' : '/month'}</span>
           </div>
         </div>
       </div>
